@@ -10,6 +10,8 @@ import {
   TextField
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
+import {Frame, Navigation} from '@shopify/polaris';
+import {HomeMinor, OrdersMinor, ProductsMinor} from '@shopify/polaris-icons';
 
 import { trophyImage } from "../assets";
 
@@ -28,9 +30,6 @@ export default function HomePage() {
         <Layout.Section>
           <FormCard />
         </Layout.Section>
-        {/* <Layout.Section>
-          <ProductsCard />
-        </Layout.Section> */}
       </Layout>
     </Page>
   );
