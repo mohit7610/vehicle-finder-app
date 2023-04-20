@@ -1,0 +1,71 @@
+{% style %}
+  #section--{{ block.id }}{
+    color: {{ block.settings.textcolor }}
+  }
+{% endstyle %}
+
+<div id="section--{{ block.id }}">
+  Isko Ignore Kro Ye app se aarha hai mai test kr rha hu
+</div>
+
+<h1>Authors</h1>
+<ul id="authors"></ul>
+
+
+<script>
+  const ul = document.getElementById('authors');
+  const list = document.createDocumentFragment();
+  const url = 'http://localhost:8081/api/getbrand';
+
+  fetch(url).then((response) => {
+    return response.json();
+  }).then((data) => {
+    let authors = data;
+
+    authors.map(function(author) {
+      let li = document.createElement('li');
+      let selectbrandmodel = document.createElement('h2');
+      let model = document.createElement('span');
+
+      selectbrandmodel.innerHTML = `${
+        author.selectbrandmodel
+      }`;
+      model.innerHTML = `${
+        author.model
+      }`;
+
+      li.appendChild(selectbrandmodel);
+      li.appendChild(model);
+      list.appendChild(li);
+    });
+  }).catch(function(error) {
+    console.log(error);
+  });
+
+  ul.appendChild(list);
+</script>
+
+
+<script>
+  const res = await axios.get("http://localhost:8081/api/getbrand")
+  console.log(res);
+</script>
+
+
+{% render 'app_snippet' %}
+{% schema %}
+  {
+    "name": "Hello World",
+    "target": "section",
+    "stylesheet": "app.css",
+    "javascript": "app.js",
+    "settings": [
+      {
+        "label": "Color",
+        "id": "textcolor",
+        "type": "color",
+        "default": "#000"
+      }
+    ]
+  }
+{% endschema %}
